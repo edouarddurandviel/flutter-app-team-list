@@ -1,0 +1,101 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Prevision previsionFromJson(String str) => Prevision.fromJson(json.decode(str));
+
+String previsionToJson(Prevision data) => json.encode(data.toJson());
+
+class Prevision {
+  Prevision({
+    this.city,
+  });
+
+  City city;
+
+  factory Prevision.fromJson(Map<String, dynamic> json) => Prevision(
+        city: City.fromJson(json["city"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "city": city.toJson(),
+      };
+}
+
+class City {
+  City({
+    this.insee,
+    this.cp,
+    this.latitude,
+    this.longitude,
+    this.altitude,
+    this.name,
+  });
+
+  String insee;
+  int cp;
+  double latitude;
+  double longitude;
+  int altitude;
+  String name;
+
+  factory City.fromJson(Map<String, dynamic> json) => City(
+        insee: json["insee"],
+        cp: json["cp"],
+        latitude: json["latitude"].toDouble(),
+        longitude: json["longitude"].toDouble(),
+        altitude: json["altitude"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "insee": insee,
+        "cp": cp,
+        "latitude": latitude,
+        "longitude": longitude,
+        "altitude": altitude,
+        "name": name,
+      };
+}
+
+const String mon_token =
+    '9ed48ffe4cade20eb03728bf30e80ac39ee9986150b4b76f347d174b8b10668a';
+
+Future<Prevision> fetchPrevisions(String insee) async {
+  final String url =
+      "https://api.meteo-concept.com/api/location/cities?token=9ed48ffe4cade20eb03728bf30e80ac39ee9986150b4b76f347d174b8b10668a&search=$insee";
+
+  final response = await http.get(url);
+
+  print(response.body);
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    Map myResponse = jsonDecode(response.body);
+    // then parse the JSON.
+    return Prevision.fromJson(myResponse);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load City');
+  }
+}
+
+Map<String, String> headers = {"Content-type": "application/json"};
+
+Future<Prevision> postPrevisions(String insee) async {
+  final String url =
+      "https://api.meteo-concept.com/api/location/cities?token=9ed48ffe4cade20eb03728bf30e80ac39ee9986150b4b76f347d174b8b10668a&search=$insee";
+
+  final response = await http.post(url);
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    Map myResponse = jsonDecode(response.body);
+    // then parse the JSON.
+    return Prevision.fromJson(myResponse);
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load City Rennes');
+  }
+}

@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:myapp/home/GradientAppBar.dart';
+import 'package:myapp/meteo/Service.dart';
+
+class Meteo extends StatelessWidget {
+  Meteo({Key key, this.insee}) : super(key: key);
+  final String insee;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: new MeteoBody(),
+    );
+  }
+}
+
+class MeteoBody extends StatefulWidget {
+  @override
+  _MeteoBodyState createState() => new _MeteoBodyState();
+}
+
+class _MeteoBodyState extends State<MeteoBody> {
+  Future<Prevision> previsionFuture;
+  Future<Prevision> serchPrev;
+
+  //static String location;
+
+  @override
+  void initState() {
+    super.initState();
+    //previsionFuture = fetchPrevisions(insee);
+    //serchPrev = postPrevisions();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Column(
+      children: <Widget>[
+        new GradientAppBar("Météo résultat"),
+        new Container(
+          child: Center(
+            widthFactor: 1.0,
+            heightFactor: 1.0,
+            child: FutureBuilder<Prevision>(
+              future: previsionFuture,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  ListView.builder(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text('${snapshot.data.city}'),
+                      );
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+
+                return CircularProgressIndicator();
+              },
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
