@@ -54,23 +54,22 @@ class DBProvider {
     // Get a reference to the database.
     final db = await database;
 
-    // Remove the Dog from the database.
+    // Remove employee from the database.
     await db.delete(
       'app_team',
-      // Use a `where` clause to delete a specific dog.
+      // Use a `where` clause to delete a specific employee.
       where: "id = ?",
-      // Pass the Dog's id as a whereArg to prevent SQL injection.
+      // Pass the employee's id as a whereArg to prevent SQL injection.
       whereArgs: [id],
     );
   }
 
   Future<void> createEmployee(Team newEmployee) async {
-    // Get a reference to the database.
+    // Get a ref to the database.
     final Database db = await database;
 
-    // Insert the Dog into the correct table. Also specify the
-    // `conflictAlgorithm`. In this case, if the same dog is inserted
-    // multiple times, it replaces the previous data.
+    // Insert the employee into the correct table. 
+    // conflictAlgorithm it replaces the previous data.
     await db.insert(
       'app_team',
       newEmployee.toMap(),
@@ -87,7 +86,7 @@ class DBProvider {
     // Query the table for all The Dogs.
     final List<Map<String, dynamic>> maps = await db.query('app_team');
 
-    // Convert the List<Map<String, dynamic> into a List<Dog>.
+    // Convert the List<Map<String, dynamic> into a List<Employee>.
     return List.generate(maps.length, (i) {
       return Team(
         id: maps[i]['id'],
@@ -102,10 +101,10 @@ class DBProvider {
     // Get a reference to the database.
     final Database db = await database;
 
-    // Query the table for all The Dogs.
+    // Query the table for all The employee.
     final List<Map<String, dynamic>> maps = await db.query('app_team');
 
-    // Convert the List<Map<String, dynamic> into a List<Dog>.
+    // Convert the List<Map<String, dynamic> into a List<employee>.
     return List.generate(maps.length, (i) {
       return Team(
         id: maps[i]['id'],
