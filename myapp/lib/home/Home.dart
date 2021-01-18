@@ -26,7 +26,7 @@ class _HomePageBodyState extends State<HomePageBody> {
   Widget build(BuildContext context) {
     return new Column(
       children: <Widget>[
-        new GradientAppBar("Build a team"),
+        new GradientAppBar("Build the team"),
         new SearchForm()
       ],
     );
