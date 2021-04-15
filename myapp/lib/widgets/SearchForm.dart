@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:myapp/members/models/Model_team.dart';
 import 'package:myapp/theme.dart' as Theme;
@@ -11,7 +9,7 @@ import 'package:myapp/members/DB_provider.dart';
 
 import 'package:myapp/Routes.dart';
 
-import 'package:myapp/pages/team_detail.dart';
+//import 'package:myapp/pages/team_detail.dart';
 
 class SearchForm extends StatefulWidget {
   final Members member;
