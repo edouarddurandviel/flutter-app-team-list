@@ -39,6 +39,9 @@ class TabColors {
   static const Color tabBarBackground = const Color.fromRGBO(217, 48, 37, 1);
   static const Color tabBarGradientStart = const Color.fromRGBO(217, 48, 37, 1);
   static const Color tabBarGradientEnd = const Color.fromRGBO(217, 48, 37, .2);
+  static const Color appBarGradientStart =
+      const Color.fromRGBO(217, 48, 37, .2);
+  static const Color appBarGradientEnd = const Color.fromRGBO(217, 48, 37, .2);
 
   static const Color formFields = const Color.fromRGBO(74, 74, 74, 1);
 }
