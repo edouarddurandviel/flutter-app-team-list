@@ -5,8 +5,15 @@ import 'package:myapp/home/Home.dart';
 
 void main() {
   Routes.initRoutes();
-  runApp(new MaterialApp(
-    title: "App",
-    home: new Home(),
-  ));
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: "App",
+      home: new Home(),
+    );
+  }
 }
