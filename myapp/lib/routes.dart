@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/pages/team_detail.dart';
 
 class Routes {
-  static final Router _router = new Router();
+  static final _router = new FluroRouter();
 
   static var teamDetailsHandler = new Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
